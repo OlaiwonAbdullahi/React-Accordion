@@ -1,10 +1,13 @@
 import { useState } from "react";
 
 export default function Accordion({ data }) {
+  const [curOpen, setisOpen] = useState(1);
   return (
     <div className="accordion">
       {data.map((el) => (
         <AccordionItem
+          curOpen={curOpen}
+          onOpen={setisOpen}
           key={el.num}
           title={el.title}
           text={el.text}
@@ -15,8 +18,8 @@ export default function Accordion({ data }) {
   );
 }
 
-function AccordionItem({ num, title, text }) {
-  const [isOpen, setisOpen] = useState(false);
+function AccordionItem({ num, title, text, curOpen, onOpen }) {
+  const isOpen = num === curOpen;
 
   const handleIsOpen = () => {
     setisOpen(!isOpen);
